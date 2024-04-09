@@ -26,10 +26,10 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-Unit tests are provided for both service and controller. You also have an e2e test that checks if the data is correct for those urls. 
+Unit tests are available for both the service and controller. Additionally, an end-to-end (e2e) test verifies the correctness of data retrieved from the specified URLs.
 
 ## Caching
-The data we fetch from the flight services will be cached in memory. This is a memory cache, so it will be deleted on restart and we'll have to recache data again. Caching TTL is 1 hour.
+Data obtained from the flight services will be cached in memory. This cache operates in-memory and will be cleared upon restart, necessitating the recaching of data. The Time-To-Live (TTL) for caching is set to 1 hour.
 
-## Config
-There are two config available in .env file. You can specify new url to fetch data from, and specify the cache ttl.
+## Configuration
+The .env file contains two configurable parameters. You can specify new URLs from which to fetch data and adjust the cache TTL according to your requirements.
