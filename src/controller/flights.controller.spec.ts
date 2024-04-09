@@ -1,6 +1,6 @@
 import { FlightService } from '../service/flight.service';
 import { FlightController } from './flight.controller';
-import { FlightResponse } from 'src/flight.model';
+import { FlightResponse } from 'src/model/flight.model';
 import { flightsData } from '../../test/flights';
 import { Test } from '@nestjs/testing';
 import { CacheModule } from '@nestjs/cache-manager';

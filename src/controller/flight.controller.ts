@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { FlightService } from '../service/flight.service';
-import { FlightResponse } from '../flight.model';
+import { FlightResponse } from '../model/flight.model';
 
 @Controller()
 export class FlightController {
