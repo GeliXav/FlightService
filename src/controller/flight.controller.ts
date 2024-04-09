@@ -3,7 +3,7 @@ import { FlightService } from '../service/flight.service';
 import { FlightResponse } from '../flight.model';
 
 @Controller()
-export class FlightsController {
+export class FlightController {
   constructor(private readonly flightService: FlightService) {}
 
   @Get('/flights')

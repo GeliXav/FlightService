@@ -10,7 +10,7 @@ export class FlightService {
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
     private readonly httpService: HttpService,
   ) {}
-  
+
   async getFlights(): Promise<FlightResponse> {
     const flightSources = process.env.FLIGHT_URLS;
 
@@ -18,7 +18,7 @@ export class FlightService {
       console.error(
         'There are no flight sources available. Please provide the flight sources in the environment variable FLIGHT_URLS.',
       );
-      throw Error('There are no flight sources available.')
+      throw Error('There are no flight sources available.');
     }
     const promiseGetFlights = [];
     const flightUrls = flightSources.split(',');
@@ -63,10 +63,12 @@ export class FlightService {
     }
     let flights = [];
     try {
-      flights = (await this.httpService.axiosRef({
-        url : url,
-        method: 'GET',
-      })).data.flights;
+      flights = (
+        await this.httpService.axiosRef({
+          url: url,
+          method: 'GET',
+        })
+      ).data.flights;
       await this.cacheManager.set(url, flights, Number(cacheTTL));
     } catch (error) {
       console.error('The flight could not be retrieved from the url: ' + url);
