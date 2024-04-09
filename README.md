@@ -1,8 +1,10 @@
 # Flights PowerUs 🛫
 
-This repository contains a service to fetch flights from multiple sources. It will merge flights and remove duplicates.
-You can find the routing in `flight.controller.ts` ` GET /flights`.
-The FlightService then contains the logic for fetching data and removing duplicates. If one of the provider we fetch data to is down, we then return empty for the data it should provide.
+This repository hosts a service designed to retrieve flight information from various sources. The service consolidates flight data from these sources, eliminating duplicates in the process.
+
+You can locate the routing for accessing flight data in flight.controller.ts, specifically under the `GET /flights` endpoint.
+
+The `FlightService` encapsulates the logic responsible for fetching flight data and handling duplicate removal. In case any of the data providers used for fetching flights are unavailable, the service gracefully returns empty data for the affected provider.
 
 ## Installation and running the app
 
