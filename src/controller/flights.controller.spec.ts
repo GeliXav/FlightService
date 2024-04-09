@@ -22,7 +22,7 @@ describe('FlightsController', () => {
   });
 
   describe('findAll', () => {
-    it('should return an array of cats', async () => {
+    it('should return flights', async () => {
       const flights: FlightResponse = {
         ...flightsData,
       };

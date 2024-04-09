@@ -5,8 +5,8 @@ import { FlightService } from './flight.service';
 import { CacheModule } from '@nestjs/cache-manager';
 import { flightsData, flightsData2 } from '../../test/flights';
 
-describe('PokemonService', () => {
-  let flightService: FlightService; // renamed variable to pokemonService
+describe('FlightService', () => {
+  let flightService: FlightService;
   let httpService: DeepMocked<HttpService>;
   process.env.CACHE_TTL = '60';
 
