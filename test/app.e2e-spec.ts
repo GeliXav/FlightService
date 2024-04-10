@@ -49,8 +49,6 @@ describe('FlightController (e2e)', () => {
     await mock.register(mockRequest, response);
     await mock.register(mockRequest2, response2);
 
-    console.log(expectedResponse.flights.length);
-
     return request(app.getHttpServer())
       .get('/flights')
       .expect(200)
