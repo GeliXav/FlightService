@@ -23,7 +23,12 @@ export class FlightService {
     const promiseGetFlights = [];
     const flightUrls = flightSources.split(',');
     for (const url of flightUrls) {
-      promiseGetFlights.push(this.getFlightFromUrl(url, Number(process.env.TIMEOUT_MS) / flightUrls.length));
+      promiseGetFlights.push(
+        this.getFlightFromUrl(
+          url,
+          Number(process.env.TIMEOUT_MS) / flightUrls.length,
+        ),
+      );
     }
 
     const responses = await Promise.all(promiseGetFlights);
@@ -53,7 +58,10 @@ export class FlightService {
     return identifier;
   }
 
-  private async getFlightFromUrl(url: string, timeout: number): Promise<Flight[]> {
+  private async getFlightFromUrl(
+    url: string,
+    timeout: number,
+  ): Promise<Flight[]> {
     const cachedFlights = (await this.cacheManager.get(url)) as Flight[];
     const cacheTTL = process.env.CACHE_TTL;
     if (cachedFlights) {
@@ -75,4 +83,5 @@ export class FlightService {
     }
     return flights;
   }
+
 }
