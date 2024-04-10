@@ -28,6 +28,16 @@ $ npm run test:cov
 ```
 Unit tests are available for both the service and controller. Additionally, an end-to-end (e2e) test verifies the correctness of data retrieved from the specified URLs.
 
+## E2E tests
+To run E2E we use a Wiremock server. You can create one using 
+```bash
+docker run -it --rm \            
+  -p 8080:8080 \
+  --name wiremock \
+  wiremock/wiremock:3.5.2
+```
+Then you can run the e2e test using `npm run test:e2e`. The e2e tests will verify that the endpoint doesn't take longer than 1s.
+
 ## Caching
 Data obtained from the flight services will be cached in memory. This cache operates in-memory and will be cleared upon restart, necessitating the recaching of data. The Time-To-Live (TTL) for caching is set to 1 hour.
 
