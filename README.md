@@ -31,7 +31,7 @@ Unit tests are available for both the service and controller. Additionally, an e
 ## E2E tests
 To run E2E we use a Wiremock server. You can create one using 
 ```bash
-docker run -it --rm \            
+docker run -it --rm \
   -p 8080:8080 \
   --name wiremock \
   wiremock/wiremock:3.5.2

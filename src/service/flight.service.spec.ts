@@ -5,6 +5,7 @@ import { FlightService } from './flight.service';
 import { CacheModule } from '@nestjs/cache-manager';
 import { flightsData, flightsData2 } from '../../test/flights';
 
+jest.mock('@nestjs/axios');
 describe('FlightService', () => {
   let flightService: FlightService;
   let httpService: DeepMocked<HttpService>;
@@ -25,6 +26,13 @@ describe('FlightService', () => {
 
     flightService = module.get<FlightService>(FlightService);
     httpService = module.get(HttpService);
+  });
+
+  it('There is no flight urls provided', async () => {
+    process.env.FLIGHT_URLS = '';
+    await expect(flightService.getFlights()).rejects.toThrow(
+      'There are no flight sources available.',
+    );
   });
 
   it('Flights are returned from a single source', async () => {

@@ -83,5 +83,4 @@ export class FlightService {
     }
     return flights;
   }
-
 }

@@ -73,7 +73,7 @@ describe('FlightController (e2e)', () => {
 
     const response2: IWireMockResponse = {
       status: 500,
-      body: { "error" : "Internal Server Error"},
+      body: { error: 'Internal Server Error' },
     };
 
     await mock.register(mockRequest, response);
@@ -102,7 +102,7 @@ describe('FlightController (e2e)', () => {
 
     const response2: IWireMockResponse = {
       status: 500,
-      body: { ...flights2E2E},
+      body: { ...flights2E2E },
     };
 
     await mock.register(mockRequest, response);
