@@ -24,10 +24,7 @@ export class FlightService {
     const flightUrls = flightSources.split(',');
     for (const url of flightUrls) {
       promiseGetFlights.push(
-        this.getFlightFromUrl(
-          url,
-          Number(process.env.TIMEOUT_MS) / flightUrls.length,
-        ),
+        this.getFlightFromUrl(url, Number(process.env.TIMEOUT_MS)),
       );
     }
 
@@ -64,23 +61,20 @@ export class FlightService {
   }
 
   private removeDuplicates(flights: Flight[]): Flight[] {
-    const duplicateFlights = [];
-    const uniqueFlights = [];
-    flights.forEach((flight) => {
-      const flightIdentifier = this.getFlightIdentifier(flight);
-      if (duplicateFlights.includes(flightIdentifier)) {
-        return;
+    const seen = new Set();
+    return flights.filter((flight) => {
+      const identifier = this.getFlightIdentifier(flight);
+      if (seen.has(identifier)) {
+        return false;
       }
-      duplicateFlights.push(flightIdentifier);
-      uniqueFlights.push(flight);
+      seen.add(identifier);
+      return true;
     });
-    return uniqueFlights;
   }
 
   private getFlightIdentifier(flight: Flight): string {
-    const identifier = flight.slices
+    return flight.slices
       .map((slice) => slice.flight_number + slice.departure_date_time_utc)
       .join();
-    return identifier;
   }
 }
