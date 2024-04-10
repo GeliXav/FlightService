@@ -42,4 +42,4 @@ Then you can run the e2e test using `npm run test:e2e`. The e2e tests will verif
 Data obtained from the flight services will be cached in memory. This cache operates in-memory and will be cleared upon restart, necessitating the recaching of data. The Time-To-Live (TTL) for caching is set to 1 hour.
 
 ## Configuration
-The .env file contains two configurable parameters. You can specify new URLs from which to fetch data and adjust the cache TTL according to your requirements.
+The .env file contains three configurable parameters. You can specify new URLs from which to fetch data, adjust the cache TTL, and adjust the timeout according to your requirements.
