@@ -23,7 +23,7 @@ export class FlightService {
     const promiseGetFlights = [];
     const flightUrls = flightSources.split(',');
     for (const url of flightUrls) {
-      promiseGetFlights.push(this.getFlightFromUrl(url));
+      promiseGetFlights.push(this.getFlightFromUrl(url, Number(process.env.TIMEOUT_MS) / flightUrls.length));
     }
 
     const responses = await Promise.all(promiseGetFlights);
@@ -50,15 +50,14 @@ export class FlightService {
     const identifier = flight.slices
       .map((slice) => slice.flight_number + slice.departure_date_time_utc)
       .join();
-    console.log(identifier);
     return identifier;
   }
 
-  private async getFlightFromUrl(url: string): Promise<Flight[]> {
+  private async getFlightFromUrl(url: string, timeout: number): Promise<Flight[]> {
     const cachedFlights = (await this.cacheManager.get(url)) as Flight[];
     const cacheTTL = process.env.CACHE_TTL;
     if (cachedFlights) {
-      console.debug('Flight retrieved from cache');
+      console.debug('Flights retrieved from cache');
       return cachedFlights;
     }
     let flights = [];
@@ -67,6 +66,7 @@ export class FlightService {
         await this.httpService.axiosRef({
           url: url,
           method: 'GET',
+          timeout: timeout,
         })
       ).data.flights;
       await this.cacheManager.set(url, flights, Number(cacheTTL));

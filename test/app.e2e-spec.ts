@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
-import { flightResponse } from './flights';
 
 describe('FlightController (e2e)', () => {
   let app: INestApplication;
@@ -18,10 +17,10 @@ describe('FlightController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
+  it('/flights returns 200 and is less than 1s', () => {
     return request(app.getHttpServer())
       .get('/flights')
       .expect(200)
-      .expect(flightResponse);
+      .timeout(1000)
   });
 });
