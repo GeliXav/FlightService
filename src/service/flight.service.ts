@@ -37,27 +37,6 @@ export class FlightService {
     return { flights: flightsWithoutDuplicates };
   }
 
-  private removeDuplicates(flights: Flight[]): Flight[] {
-    const duplicateFlights = [];
-    const uniqueFlights = [];
-    flights.forEach((flight) => {
-      const flightIdentifier = this.getFlightIdentifier(flight);
-      if (duplicateFlights.includes(flightIdentifier)) {
-        return;
-      }
-      duplicateFlights.push(flightIdentifier);
-      uniqueFlights.push(flight);
-    });
-    return uniqueFlights;
-  }
-
-  private getFlightIdentifier(flight: Flight): string {
-    const identifier = flight.slices
-      .map((slice) => slice.flight_number + slice.departure_date_time_utc)
-      .join();
-    return identifier;
-  }
-
   private async getFlightFromUrl(
     url: string,
     timeout: number,
@@ -82,5 +61,26 @@ export class FlightService {
       console.error('The flight could not be retrieved from the url: ' + url);
     }
     return flights;
+  }
+
+  private removeDuplicates(flights: Flight[]): Flight[] {
+    const duplicateFlights = [];
+    const uniqueFlights = [];
+    flights.forEach((flight) => {
+      const flightIdentifier = this.getFlightIdentifier(flight);
+      if (duplicateFlights.includes(flightIdentifier)) {
+        return;
+      }
+      duplicateFlights.push(flightIdentifier);
+      uniqueFlights.push(flight);
+    });
+    return uniqueFlights;
+  }
+
+  private getFlightIdentifier(flight: Flight): string {
+    const identifier = flight.slices
+      .map((slice) => slice.flight_number + slice.departure_date_time_utc)
+      .join();
+    return identifier;
   }
 }
